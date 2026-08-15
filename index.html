@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="¿Le crees a la IA? Una experiencia interactiva para reflexionar sobre el uso ético, crítico y responsable de la inteligencia artificial."
+    >
+
+    <title>¿Le crees a la IA?</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <!-- =========================================================
+         APLICACIÓN
+    ========================================================== -->
+
+    <div id="app">
+
+        <!-- =====================================================
+             PANTALLA DE INICIO
+        ====================================================== -->
+
+        <section
+            id="welcome-screen"
+            class="screen active"
+        >
+
+            <div class="welcome-container">
+
+                <div class="ai-symbol">
+                    AI
+                </div>
+
+                <p class="campaign-label">
+                    EXPERIENCIA INTERACTIVA
+                </p>
+
+                <h1>
+                    ¿Le crees<br>
+                    <span>a la IA?</span>
+                </h1>
+
+                <p class="welcome-text">
+                    Una inteligencia artificial puede responder
+                    de manera rápida, segura y convincente.
+                </p>
+
+                <p class="welcome-question">
+                    Pero... ¿eso significa que siempre tiene razón?
+                </p>
+
+                <button
+                    id="start-button"
+                    class="primary-button"
+                >
+                    Comenzar experiencia
+                </button>
+
+                <p class="welcome-warning">
+                    Esta experiencia contiene respuestas
+                    deliberadamente engañosas.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             PANTALLA DEL CHAT
+        ====================================================== -->
+
+        <section
+            id="chat-screen"
+            class="screen"
+        >
+
+            <!-- CABECERA -->
+
+            <header class="chat-header">
+
+                <div class="brand">
+
+                    <div class="brand-icon">
+                        AI
+                    </div>
+
+                    <div class="brand-info">
+
+                        <h2>
+                            Asistente IA
+                        </h2>
+
+                        <span class="status">
+                            ● En línea
+                        </span>
+
+                    </div>
+
+                </div>
+
+                <div class="progress-info">
+
+                    <span id="question-counter">
+                        0 / 5
+                    </span>
+
+                </div>
+
+            </header>
+
+
+            <!-- ÁREA DE CONVERSACIÓN -->
+
+            <main
+                id="chat-container"
+                class="chat-container"
+            >
+
+                <div class="chat-introduction">
+
+                    <div class="bot-avatar">
+                        AI
+                    </div>
+
+                    <div class="message bot-message">
+
+                        <p>
+                            Hola. Soy un asistente de inteligencia
+                            artificial.
+                        </p>
+
+                        <p>
+                            Puedes preguntarme lo que quieras.
+                            También puedes comenzar seleccionando
+                            uno de estos temas.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- PREGUNTAS SUGERIDAS -->
+
+                <div
+                    id="suggestions"
+                    class="suggestions"
+                >
+
+                    <p class="suggestions-title">
+                        Puedes comenzar por:
+                    </p>
+
+                    <button
+                        class="suggestion-button"
+                        data-category="ciencia"
+                    >
+                        🧠 Ciencia
+                    </button>
+
+                    <button
+                        class="suggestion-button"
+                        data-category="historia"
+                    >
+                        📚 Historia
+                    </button>
+
+                    <button
+                        class="suggestion-button"
+                        data-category="tecnologia"
+                    >
+                        💻 Tecnología
+                    </button>
+
+                    <button
+                        class="suggestion-button"
+                        data-category="educacion"
+                    >
+                        🎓 Educación
+                    </button>
+
+                    <button
+                        class="suggestion-button"
+                        data-category="ia"
+                    >
+                        🤖 Inteligencia artificial
+                    </button>
+
+                </div>
+
+            </main>
+
+
+            <!-- INDICADOR DE RESPUESTA -->
+
+            <div
+                id="typing-indicator"
+                class="typing-indicator hidden"
+            >
+
+                <div class="bot-avatar small">
+                    AI
+                </div>
+
+                <div class="typing-bubble">
+
+                    <span></span>
+                    <span></span>
+                    <span></span>
+
+                </div>
+
+                <span class="typing-text">
+                    Generando respuesta...
+                </span>
+
+            </div>
+
+
+            <!-- ÁREA DE ENTRADA -->
+
+            <footer class="chat-input-area">
+
+                <form id="chat-form">
+
+                    <div class="input-wrapper">
+
+                        <textarea
+                            id="user-input"
+                            rows="1"
+                            maxlength="500"
+                            placeholder="Escribe tu pregunta..."
+                            autocomplete="off"
+                        ></textarea>
+
+                        <button
+                            id="send-button"
+                            type="submit"
+                            aria-label="Enviar pregunta"
+                        >
+                            ➤
+                        </button>
+
+                    </div>
+
+                    <div class="input-footer">
+
+                        <span>
+                            La IA puede cometer errores.
+                        </span>
+
+                        <span id="character-counter">
+                            0 / 500
+                        </span>
+
+                    </div>
+
+                </form>
+
+            </footer>
+
+        </section>
+
+
+        <!-- =====================================================
+             PANTALLA DE CONFIABILIDAD
+        ====================================================== -->
+
+        <section
+            id="trust-screen"
+            class="screen"
+        >
+
+            <div class="trust-container">
+
+                <div class="trust-icon">
+                    ?
+                </div>
+
+                <p class="campaign-label">
+                    DETENTE UN MOMENTO
+                </p>
+
+                <h2>
+                    ¿Qué tan confiable
+                    te parece esta respuesta?
+                </h2>
+
+                <p class="trust-description">
+                    No pienses solamente si la respuesta
+                    suena bien. Pregúntate si realmente
+                    tienes razones para confiar en ella.
+                </p>
+
+                <div class="trust-options">
+
+                    <button
+                        class="trust-button"
+                        data-trust="high"
+                    >
+                        <strong>Estoy seguro</strong>
+                        <span>La respuesta parece correcta.</span>
+                    </button>
+
+                    <button
+                        class="trust-button"
+                        data-trust="medium"
+                    >
+                        <strong>Tengo algunas dudas</strong>
+                        <span>Podría ser correcta, pero quiero comprobarla.</span>
+                    </button>
+
+                    <button
+                        class="trust-button"
+                        data-trust="low"
+                    >
+                        <strong>No estoy seguro</strong>
+                        <span>Necesitaría verificar la información.</span>
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             PANTALLA DE REVELACIÓN
+        ====================================================== -->
+
+        <section
+            id="reveal-screen"
+            class="screen"
+        >
+
+            <div class="reveal-container">
+
+                <div class="reveal-warning">
+                    ⚠
+                </div>
+
+                <p class="campaign-label">
+                    EXPERIMENTO FINALIZADO
+                </p>
+
+                <h1>
+                    Espera...
+                </h1>
+
+                <h2>
+                    No todo lo que acabas
+                    de leer era verdad.
+                </h2>
+
+                <div class="reveal-divider"></div>
+
+                <p>
+                    Algunas respuestas fueron correctas.
+                </p>
+
+                <p>
+                    Algunas fueron incompletas.
+                </p>
+
+                <p>
+                    Y algunas fueron deliberadamente falsas.
+                </p>
+
+                <div class="reveal-message">
+
+                    <strong>
+                        ¿Lo notaste?
+                    </strong>
+
+                    <span>
+                        Una respuesta puede sonar inteligente,
+                        segura y convincente... y aun así estar
+                        equivocada.
+                    </span>
+
+                </div>
+
+                <button
+                    id="reveal-button"
+                    class="primary-button"
+                >
+                    Descubrir qué pasó
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             PANTALLA DE RESULTADOS
+        ====================================================== -->
+
+        <section
+            id="results-screen"
+            class="screen"
+        >
+
+            <div class="results-container">
+
+                <p class="campaign-label">
+                    TU EXPERIENCIA
+                </p>
+
+                <h1>
+                    La IA no es la
+                    <span>fuente de la verdad.</span>
+                </h1>
+
+                <div class="results-card">
+
+                    <div class="result-item">
+
+                        <strong id="total-questions">
+                            0
+                        </strong>
+
+                        <span>
+                            preguntas
+                        </span>
+
+                    </div>
+
+                    <div class="result-item">
+
+                        <strong id="trusted-answers">
+                            0
+                        </strong>
+
+                        <span>
+                            respuestas aceptadas
+                        </span>
+
+                    </div>
+
+                    <div class="result-item">
+
+                        <strong id="doubtful-answers">
+                            0
+                        </strong>
+
+                        <span>
+                            respuestas cuestionadas
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="lesson-card">
+
+                    <h2>
+                        🧠 Lo importante
+                    </h2>
+
+                    <p>
+                        Una IA puede producir respuestas que
+                        parecen muy convincentes aunque contengan
+                        errores, información incompleta o datos
+                        inventados.
+                    </p>
+
+                    <p>
+                        Por eso, utilizar inteligencia artificial
+                        responsablemente requiere mantener una
+                        actitud crítica.
+                    </p>
+
+                </div>
+
+
+                <div class="principles">
+
+                    <h2>
+                        Antes de confiar, recuerda:
+                    </h2>
+
+                    <ul>
+
+                        <li>
+                            <strong>Pregunta.</strong>
+                            No aceptes automáticamente la primera respuesta.
+                        </li>
+
+                        <li>
+                            <strong>Verifica.</strong>
+                            Contrasta información importante.
+                        </li>
+
+                        <li>
+                            <strong>Cuestiona.</strong>
+                            Una respuesta segura no necesariamente es correcta.
+                        </li>
+
+                        <li>
+                            <strong>Protege.</strong>
+                            No compartas información personal o sensible.
+                        </li>
+
+                        <li>
+                            <strong>Decide.</strong>
+                            La IA puede ayudarte, pero el criterio sigue siendo tuyo.
+                        </li>
+
+                    </ul>
+
+                </div>
+
+
+                <button
+                    id="restart-button"
+                    class="primary-button"
+                >
+                    Experimentar nuevamente
+                </button>
+
+            </div>
+
+        </section>
+
+    </div>
+
+
+    <!-- =========================================================
+         JAVASCRIPT
+    ========================================================== -->
+
+    <script src="js/scenarios.js"></script>
+    <script src="js/questions.js"></script>
+    <script src="js/app.js"></script>
+
+</body>
+</html>
